@@ -97,7 +97,7 @@ get_latest_version() {
     local latest_version
     latest_version=$(curl -s "$GITHUB_API_URL/latest" | grep -o '"tag_name": "[^"]*' | cut -d'"' -f4)
     if [ -z "$latest_version" ]; then
-        latest_version="v2.0.3"  # 如果获取失败，使用默认版本
+        latest_version="v2.2.4"  # 如果获取失败，使用默认版本
     fi
     echo "$latest_version"
 }
@@ -107,7 +107,7 @@ get_available_versions() {
     local versions
     versions=$(curl -s "$GITHUB_API_URL" | grep -o '"tag_name": "[^"]*' | cut -d'"' -f4)
     if [ -z "$versions" ]; then
-        versions="v2.0.3"  # 如果获取失败，使用默认版本
+        versions="v2.2.4"  # 如果获取失败，使用默认版本
     fi
     echo "$versions"
 }
