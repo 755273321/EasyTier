@@ -669,7 +669,7 @@ get_server_config_info() {
         network_name="ET_$(generate_random_string 10)"
     elif [[ ! $network_name =~ ^ET_ ]]; then
         # 如果用户输入的名称没有 ET_ 前，自动添加
-        network_name="ET_${network_name}"
+        network_name="${network_name}"
     fi
     
     echo -n "网络密钥 [随机生成]: "
