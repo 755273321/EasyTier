@@ -484,6 +484,7 @@ no_tun = false
 use_smoltcp = $enable_proxy
 # 外部网络白名单
 foreign_network_whitelist = "$foreign_whitelist"
+relay-all-peer-rpc = true
 
 [log]
 level = "info"
@@ -2103,7 +2104,7 @@ no_tun = false
 use_smoltcp = $enable_proxy
 # 外部网络白名单
 foreign_network_whitelist = "$foreign_whitelist"
-# foreign_network_whitelist = "*"
+relay-all-peer-rpc = true
 
 [log]
 level = "info"
@@ -2357,7 +2358,7 @@ no_tun = false
 use_smoltcp = false
 # 外部网络白名单
 foreign_network_whitelist = "$foreign_whitelist"
-#foreign_network_whitelist = "*"
+relay-all-peer-rpc = true
 
 
 [log]
