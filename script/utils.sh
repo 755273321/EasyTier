@@ -221,8 +221,18 @@ download_file() {
 
 # 获取最新版本和下载链接
 get_download_info() {
-    # 设置固定版本号
-    LATEST_VERSION="2.0.3"
+    # 从GitHub API获取最新版本
+    local api_url="https://api.github.com/repos/EasyTier/EasyTier/releases/latest"
+    local version_info
+    
+    # 尝试从GitHub API获取最新版本
+    if version_info=$(curl -s "$api_url" | grep '"tag_name":' | sed -E 's/.*"([^"]+)".*/\1/'); then
+        LATEST_VERSION=$(echo "$version_info" | sed 's/^v//') # 去除v前缀
+    else
+        # 如果API请求失败，使用默认版本
+        log_message "WARNING" "Failed to fetch latest version from GitHub API, using fallback version"
+        LATEST_VERSION="2.2.4" # 回退版本
+    fi
     
     # 构建包名
     PACKAGE_NAME="easytier-linux-${ARCH}-v${LATEST_VERSION}.zip"
