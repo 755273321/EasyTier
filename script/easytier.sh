@@ -721,41 +721,17 @@ main() {
     echo "CPU架构: $(uname -m)"
     sleep 2
     
-    # 检查语言
+    # 设置中文
     if [ -z "$FORCE_LANG" ]; then
         clear
         echo -e "${GREEN_COLOR}=====================================${RES}"
-        if $IS_CN; then
-            echo -e "${GREEN_COLOR}      EasyTier 安装控制脚本${RES}"
-            echo -e "${GREEN_COLOR}      版本: ${SCRIPT_VERSION}${RES}"
-        else
-            echo -e "${GREEN_COLOR}      EasyTier Installation Script${RES}"
-            echo -e "${GREEN_COLOR}      Version: ${SCRIPT_VERSION}${RES}"
-        fi
+        echo -e "${GREEN_COLOR}      EasyTier 安装控制脚本${RES}"
+        echo -e "${GREEN_COLOR}      版本: ${SCRIPT_VERSION}${RES}"
         echo -e "${GREEN_COLOR}=====================================${RES}"
-        echo -e "\n${BLUE_COLOR}请选择语言 / Please select language:${RES}"
-        echo "1. 中文 / Chinese"
-        echo "2. English"
-        echo -n "Enter your choice [1/2] [default=2]: "
-        read lang_choice
-
-        case "$lang_choice" in
-            1|"中文") 
-                IS_CN=true 
-                define_messages
-                show_main_menu
-                ;;
-            2|"English"|"") 
-                IS_CN=false 
-                define_messages
-                show_main_menu
-                ;;
-            *) 
-                echo "Invalid choice / 无效选项"
-                sleep 2
-                exec "$0"
-                ;;
-        esac
+        
+        IS_CN=true
+        define_messages
+        show_main_menu
     fi
 }
 
