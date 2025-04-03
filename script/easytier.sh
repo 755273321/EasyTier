@@ -89,7 +89,7 @@ IS_CN=false
 COMMEND=""
 
 # 修改版本信息定义
-SCRIPT_VERSION="v1.0.0"
+SCRIPT_VERSION="v1.0.1"
 GITHUB_API_URL="https://api.github.com/repos/EasyTier/EasyTier/releases"
 
 # 获取官方最新版本号
