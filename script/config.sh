@@ -483,7 +483,8 @@ no_tun = false
 # 启用smoltcp
 use_smoltcp = $enable_proxy
 # 外部网络白名单
-foreign_network_whitelist = "*"
+foreign_network_whitelist = "$foreign_whitelist"
+#foreign_network_whitelist = "*"
 
 [log]
 level = "info"
@@ -935,6 +936,16 @@ cidr = \"$proxy_cidr\"
             echo -e "${YELLOW_COLOR}未输入任何CIDR，跳过防火墙配置${RES}"
         fi
     fi
+
+    # 6. 外部网络白名单设置
+    echo -e "\n${BLUE_COLOR}【外部网络访问控制】${RES}"
+    echo -e "${YELLOW_COLOR}格式说明：${RES}"
+    echo -e "1. 允许所有网络： * （默认值）"
+    echo -e "2. 允许特定域名/网段：输入以空格分隔的列表（例如：example.com 192.168.1.0/24）"
+    echo -e "3. 留空表示允许所有网络"
+    echo -n "请输入外部网络白名单 [默认: *]: "
+    read foreign_whitelist
+    foreign_whitelist=${foreign_whitelist:-"*"}
     
     # 生成配置文件前检查冲突
     if ! check_port_and_ip_conflicts "$config_file" "$tcp_port" "$wg_port" "$ipv4" "$rpc_port" "$ws_port" "$wss_port"; then
@@ -1800,6 +1811,15 @@ uri = \"$peer_uri\"
                 ;;
         esac
     done
+
+    # 4.5. 子网代理设置（可选）
+    echo -e "\n${BLUE_COLOR}【外部网络访问控制】${RES}"
+    echo -e "${YELLOW_COLOR}格式说明：${RES}"
+    echo -e "1. 允许所有网络： * （默认值）"
+    echo -e "2. 允许特定域名/网段：输入以空格分隔的列表"
+    echo -n "请输入外部网络白名单 [默认: *]: "
+    read foreign_whitelist
+    foreign_whitelist=${foreign_whitelist:-"*"}
     
     # 5. 子网代理设置（可选）
     echo -e "\n${BLUE_COLOR}子网代理设置：${RES}"
@@ -2021,7 +2041,8 @@ no_tun = false
 # 启用smoltcp
 use_smoltcp = $enable_proxy
 # 外部网络白名单
-foreign_network_whitelist = "*"
+foreign_network_whitelist = "$foreign_whitelist"
+# foreign_network_whitelist = "*"
 
 [log]
 level = "info"
@@ -2274,7 +2295,9 @@ no_tun = false
 # 启用smoltcp
 use_smoltcp = false
 # 外部网络白名单
-foreign_network_whitelist = "*"
+foreign_network_whitelist = "$foreign_whitelist"
+#foreign_network_whitelist = "*"
+
 
 [log]
 level = "info"
