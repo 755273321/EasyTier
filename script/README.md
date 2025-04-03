@@ -31,22 +31,22 @@ EasyTier 是一个简单、安全、去中心化的内网穿透 VPN 组网方案
 ##  jsdelivr CDN 镜像源
 
 ```bash
-bash <(curl -sL https://gcore.jsdelivr.net/gh/CGG888/EasyTier/script/easytier.sh)
-bash <(curl -sL https://fastly.jsdelivr.net/gh/CGG888/EasyTier/script/easytier.sh)
-bash <(curl -sL https://testingcf.jsdelivr.net/gh/CGG888/EasyTier/script/easytier.sh)
-bash <(curl -sL https://quantil.jsdelivr.net/gh/CGG888/EasyTier/script/easytier.sh)
+bash <(curl -sL https://gcore.jsdelivr.net/gh/755273321/EasyTier/script/easytier.sh)
+bash <(curl -sL https://fastly.jsdelivr.net/gh/755273321/EasyTier/script/easytier.sh)
+bash <(curl -sL https://testingcf.jsdelivr.net/gh/755273321/EasyTier/script/easytier.sh)
+bash <(curl -sL https://quantil.jsdelivr.net/gh/755273321/EasyTier/script/easytier.sh)
 ```
 
 #### 使用国内镜像加速
 
 ```bash
-bash <(curl -sL https://gh.ddlc.top/https://raw.githubusercontent.com/CGG888/EasyTier/main/script/easytier.sh)
+bash <(curl -sL https://gh.ddlc.top/https://raw.githubusercontent.com/755273321/EasyTier/main/script/easytier.sh)
 ```
 
 Github地址：
 
 ```bash
-bash <(curl -sL https://raw.githubusercontent.com/CGG888/EasyTier/main/script/easytier.sh)
+bash <(curl -sL https://raw.githubusercontent.com/755273321/EasyTier/main/script/easytier.sh)
 ```
 
 
@@ -156,7 +156,7 @@ bash <(curl -sL https://raw.githubusercontent.com/CGG888/EasyTier/main/script/ea
 
 如有问题，请访问：
 
-* GitHub: https://github.com/EasyTier/EasyTier https://github.com/CGG888/EasyTier/blob/main/script/README.md
+* GitHub: https://github.com/EasyTier/EasyTier https://github.com/755273321/EasyTier/blob/main/script/README.md
 * 官网：https://www.easytier.top
 
 ## 许可证
