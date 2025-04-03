@@ -2286,7 +2286,7 @@ create_public_server_config() {
     echo -e "\n${BLUE_COLOR}【公共网络信息】${RES}"
     echo -e "${YELLOW_COLOR}网络名称: ${RES}easytier"
     echo -e "${YELLOW_COLOR}网络密钥: ${RES}easytier"
-    echo -e "${YELLOW_COLOR}公共节: ${RES}tcp://public.easytier.top:11010"
+    echo -e "${YELLOW_COLOR}公共节: ${RES}tcp://mail.huise.fun:11010"
     
     echo -e "\n${YELLOW_COLOR}注意事项：${RES}"
     echo "1. 加入公共网络意味着您的节点将成为公共服务器集群的一部分"
@@ -2323,19 +2323,19 @@ listeners = [
 
 # Peer节点列表
 [[peer]]
-uri = "tcp://public.easytier.top:11010"
+uri = "tcp://mail.huise.fun:11010"
 
 [[peer]]
-uri = "udp://public.easytier.top:11010"
+uri = "udp://mail.huise.fun:11010"
 
 # RPC管理端口
 rpc_portal = "127.0.0.1:15888"
 
 [network_identity]
 # 网络名称
-network_name = "easytier"
+network_name = "huise123"
 # 网络密钥
-network_secret = "easytier"
+network_secret = "huise123"
 
 [flags]
 # 默认协议
@@ -2357,7 +2357,7 @@ no_tun = false
 # 启用smoltcp
 use_smoltcp = false
 # 外部网络白名单
-foreign_network_whitelist = "$foreign_whitelist"
+foreign_network_whitelist = "*"
 relay-all-peer-rpc = true
 
 
