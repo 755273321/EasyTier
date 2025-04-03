@@ -484,7 +484,6 @@ no_tun = false
 use_smoltcp = $enable_proxy
 # 外部网络白名单
 foreign_network_whitelist = "$foreign_whitelist"
-#foreign_network_whitelist = "*"
 
 [log]
 level = "info"
@@ -834,6 +833,47 @@ get_server_config_info() {
         echo "WebSocket(SSL) 监听端口: $wss_port"
         echo "RPC 管理端口: $rpc_port"
     fi
+
+    # 3.5 外部网络白名单设置
+    echo -e "\n${BLUE_COLOR}【外部网络访问控制】${RES}"
+    echo -e "${YELLOW_COLOR}请选择外部网络访问策略：${RES}"
+    echo "1. 允许所有网络（默认）"
+    echo "2. 允许特定域名/网段（需手动输入）"
+    echo "3. 禁止所有外部网络"
+    echo -n "请选择 [1-3] [默认: 1]: "
+    read access_choice
+    
+    case "$access_choice" in
+        1|"")
+            foreign_whitelist="*"
+            echo -e "${GREEN_COLOR}已设置：允许所有网络访问${RES}"
+            ;;
+        2)
+            echo -e "\n${YELLOW_COLOR}请输入允许访问的域名或网段：${RES}"
+            echo -e "格式说明："
+            echo -e "  - 多个项目用空格分隔"
+            echo -e "  - 域名示例：example.com"
+            echo -e "  - IP段示例：192.168.1.0/24"
+            echo -n "请输入： "
+            read foreign_whitelist
+            
+            # 简单验证输入是否为空
+            while [ -z "$foreign_whitelist" ]; do
+                echo -e "${RED_COLOR}错误：输入不能为空${RES}"
+                echo -n "请重新输入： "
+                read foreign_whitelist
+            done
+            echo -e "${GREEN_COLOR}已设置允许访问：${RES} $foreign_whitelist"
+            ;;
+        3)
+            foreign_whitelist=""
+            echo -e "${GREEN_COLOR}已设置：禁止所有外部网络访问${RES}"
+            ;;
+        *)
+            echo -e "${RED_COLOR}无效选择，使用默认值（允许所有网络）${RES}"
+            foreign_whitelist="*"
+            ;;
+    esac
     
     # 4. 询问是否配置 WireGuard
     local enable_wireguard="false"
@@ -936,16 +976,6 @@ cidr = \"$proxy_cidr\"
             echo -e "${YELLOW_COLOR}未输入任何CIDR，跳过防火墙配置${RES}"
         fi
     fi
-
-    # 6. 外部网络白名单设置
-    echo -e "\n${BLUE_COLOR}【外部网络访问控制】${RES}"
-    echo -e "${YELLOW_COLOR}格式说明：${RES}"
-    echo -e "1. 允许所有网络： * （默认值）"
-    echo -e "2. 允许特定域名/网段：输入以空格分隔的列表（例如：example.com 192.168.1.0/24）"
-    echo -e "3. 留空表示允许所有网络"
-    echo -n "请输入外部网络白名单 [默认: *]: "
-    read foreign_whitelist
-    foreign_whitelist=${foreign_whitelist:-"*"}
     
     # 生成配置文件前检查冲突
     if ! check_port_and_ip_conflicts "$config_file" "$tcp_port" "$wg_port" "$ipv4" "$rpc_port" "$ws_port" "$wss_port"; then
@@ -1731,6 +1761,46 @@ create_client_config() {
             ;;
     esac
     
+    echo -e "\n${BLUE_COLOR}【外部网络访问控制】${RES}"
+    echo -e "${YELLOW_COLOR}请选择外部网络访问策略：${RES}"
+    echo "1. 允许所有网络（默认）"
+    echo "2. 允许特定域名/网段（需手动输入）"
+    echo "3. 禁止所有外部网络"
+    echo -n "请选择 [1-3] [默认: 1]: "
+    read access_choice
+    
+    case "$access_choice" in
+        1|"")
+            foreign_whitelist="*"
+            echo -e "${GREEN_COLOR}已设置：允许所有网络访问${RES}"
+            ;;
+        2)
+            echo -e "\n${YELLOW_COLOR}请输入允许访问的域名或网段：${RES}"
+            echo -e "格式说明："
+            echo -e "  - 多个项目用空格分隔"
+            echo -e "  - 域名示例：example.com"
+            echo -e "  - IP段示例：192.168.1.0/24"
+            echo -n "请输入： "
+            read foreign_whitelist
+            
+            # 简单验证输入是否为空
+            while [ -z "$foreign_whitelist" ]; do
+                echo -e "${RED_COLOR}错误：输入不能为空${RES}"
+                echo -n "请重新输入： "
+                read foreign_whitelist
+            done
+            echo -e "${GREEN_COLOR}已设置允许访问：${RES} $foreign_whitelist"
+            ;;
+        3)
+            foreign_whitelist=""
+            echo -e "${GREEN_COLOR}已设置：禁止所有外部网络访问${RES}"
+            ;;
+        *)
+            echo -e "${RED_COLOR}无效选择，使用默认值（允许所有网络）${RES}"
+            foreign_whitelist="*"
+            ;;
+    esac
+    
     # 4. Peer节点设置
     echo -e "\n${BLUE_COLOR}【Peer节点设置】${RES}"
     echo -e "${YELLOW_COLOR}提示: 至少需要添加一个服务器节点${RES}"
@@ -1811,15 +1881,6 @@ uri = \"$peer_uri\"
                 ;;
         esac
     done
-
-    # 4.5. 子网代理设置（可选）
-    echo -e "\n${BLUE_COLOR}【外部网络访问控制】${RES}"
-    echo -e "${YELLOW_COLOR}格式说明：${RES}"
-    echo -e "1. 允许所有网络： * （默认值）"
-    echo -e "2. 允许特定域名/网段：输入以空格分隔的列表"
-    echo -n "请输入外部网络白名单 [默认: *]: "
-    read foreign_whitelist
-    foreign_whitelist=${foreign_whitelist:-"*"}
     
     # 5. 子网代理设置（可选）
     echo -e "\n${BLUE_COLOR}子网代理设置：${RES}"
