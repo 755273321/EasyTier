@@ -182,11 +182,11 @@ download_file() {
     
     # 构建下载链接数组，CDN 源放在前面
     local download_urls=(
-        #"https://ghproxy.com/https://github.com/EasyTier/EasyTier/releases/download/${version}/${package_name}"
-        #"https://mirror.ghproxy.com/https://github.com/EasyTier/EasyTier/releases/download/${version}/${package_name}"
-        #"https://hub.gitmirror.com/https://github.com/EasyTier/EasyTier/releases/download/${version}/${package_name}"
-        #"https://gh.ddlc.top/https://github.com/EasyTier/EasyTier/releases/download/${version}/${package_name}"
-        #"https://gh.api.99988866.xyz/https://github.com/EasyTier/EasyTier/releases/download/${version}/${package_name}"
+        "https://ghproxy.com/https://github.com/EasyTier/EasyTier/releases/download/${version}/${package_name}"
+        "https://mirror.ghproxy.com/https://github.com/EasyTier/EasyTier/releases/download/${version}/${package_name}"
+        "https://hub.gitmirror.com/https://github.com/EasyTier/EasyTier/releases/download/${version}/${package_name}"
+        "https://gh.ddlc.top/https://github.com/EasyTier/EasyTier/releases/download/${version}/${package_name}"
+        "https://gh.api.99988866.xyz/https://github.com/EasyTier/EasyTier/releases/download/${version}/${package_name}"
         "https://github.com/EasyTier/EasyTier/releases/download/${version}/${package_name}"
     )
     
