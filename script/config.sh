@@ -664,12 +664,9 @@ get_server_config_info() {
     echo -e "\n${BLUE_COLOR}网络设置：${RES}"
     echo -n "网络名称 [随机生成]: "
     read network_name
-    # 如果用户未输入，生成带前缀的10位随机字符
+    # 如果用户未输入，生成10位随机字符（不带前缀）
     if [ -z "$network_name" ]; then
-        network_name="ET_$(generate_random_string 10)"
-    elif [[ ! $network_name =~ ^ET_ ]]; then
-        # 如果用户输入的名称没有 ET_ 前，自动添加
-        network_name="${network_name}"
+        network_name=$(generate_random_string 10)
     fi
     
     echo -n "网络密钥 [随机生成]: "
@@ -1674,12 +1671,9 @@ create_client_config() {
     
     echo -n "网络名称 [随机生成]: "
     read network_name
-    # 如果用户未输入，生成带前缀的10位随机字符串
+    # 如果用户未输入，生成10位随机字符（不带前缀）
     if [ -z "$network_name" ]; then
-        network_name="ET_$(generate_random_string 10)"
-    elif [[ ! $network_name =~ ^ET_ ]]; then
-        # 如果用户输入的名称没有 ET_ 前缀，自动添加
-        network_name="ET_${network_name}"
+        network_name=$(generate_random_string 10)
     fi
     
     echo -n "网络密钥 [随机生成]: "
